@@ -4,9 +4,9 @@ var create = function(parent) {
     return new T();
 }
 
-var newInstance = function(T, arguments) {
+var newInstance = function(T, args) {
     var that = create(T.prototype);
-    var res = T.apply(that, arguments);
+    var res = T.apply(that, args);
     return res ? res : that;
 }
 
@@ -20,8 +20,8 @@ Phone.prototype.print = function() {
 Phone.prototype.prettyPrint = function() {
     console.log(this.vendor + " " + this.model);
 }
-var p1 = new Phone('3350', 'Nokia');
-var p2 = new Phone('Razor', 'Motorola');
+var p1 = newInstance(Phone, ['3350', 'Nokia']);
+var p2 = newInstance(Phone, ['Razor', 'Motorola']);
 
 p1.print();
 p2.print();
@@ -33,7 +33,7 @@ var SmartPhone = function(model, vendor, os) {
 
 SmartPhone.prototype = create(Phone.prototype); //Object.create(Phone.prototype); //new Phone();
 
-var p3 = new SmartPhone('iPhone 6', 'Apple', 'iOS8');
+var p3 = newInstance(SmartPhone, ['iPhone 6', 'Apple', 'iOS8']);
 
 p3.print();
 
